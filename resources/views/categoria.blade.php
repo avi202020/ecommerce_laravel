@@ -9,5 +9,21 @@
     </head>
     <body>
         <h2>Categoria</h2>
+
+        @if( !empty($categorias) && count($categorias)>0)
+            <ul>
+                @foreach($categorias as $cat)
+                    <li>{{$cat->descricao}}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        @if( !empty($produtos) && count($produtos)>0)
+            <ul>
+                @foreach($produtos as $prod)
+                    <li>{{$prod->nome}}</li>
+                @endforeach
+            </ul>
+        @endif
     </body>
 </html>
