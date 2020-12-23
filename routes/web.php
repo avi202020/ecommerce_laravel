@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CarrinhoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +19,5 @@ Route::match(['get','post'], '/', [ProdutoController::class, 'index'])->name('ho
 Route::match(['get','post'], '/categoria', [ProdutoController::class, 'categoria'])->name('categoria');
 Route::match(['get','post'], '/{id}/categoria', [ProdutoController::class, 'categoria'])->name('categoria.byId');
 Route::match(['get','post'], '/cadastrar', [ClienteController::class, 'cadastrar'])->name('cadastrar');
+Route::match(['get','post'], '/{idproduto}/carrinho/adicionar', [CarrinhoController::class, 'store'])->name('cart.store');
+Route::match(['get','post'], '/carrinho', [CarrinhoController::class, 'index'])->name('cart.index');

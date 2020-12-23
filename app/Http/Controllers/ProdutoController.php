@@ -15,13 +15,13 @@ class ProdutoController extends Controller
 
     public function categoria(Request $request, $idcategoria = 0){
         $categorias = Categoria::all();
-        $queryProds = Produto::limit(2);
+        $queryProds = Produto::where('id','>',0);
 
         if($idcategoria != 0){
             $queryProds->where('categoria_id',$idcategoria);
         }
 
         $produtos = $queryProds->get();
-        return view('categoria',compact('categorias','produtos'));
+        return view('categoria',compact('categorias','produtos','idcategoria'));
     }
 }

@@ -13,17 +13,26 @@ class InsertProducts extends Migration
      */
     public function up()
     {
-        $cat = new \App\Models\Categoria(['descricao'=>'geral']);
-        $cat->save();
+        $cat2 = new \App\Models\Categoria(['descricao'=>'Camisas']);
+        $cat2->save();
 
-        $prod = new \App\Models\Produto(['nome'=>'Produto 1','valor'=>10,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat->id]);
+        $cat3 = new \App\Models\Categoria(['descricao'=>'Calças']);
+        $cat3->save();
+
+        $prod = new \App\Models\Produto(['nome'=>'Camisa','valor'=>10,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat2->id]);
         $prod->save();
 
-        $prod2 = new \App\Models\Produto(['nome'=>'Produto 2','valor'=>10,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat->id]);
+        $prod2 = new \App\Models\Produto(['nome'=>'Camisa Polo','valor'=>20,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat2->id]);
         $prod2->save();
 
-        $prod3 = new \App\Models\Produto(['nome'=>'Produto 3','valor'=>10,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat->id]);
+        $prod3 = new \App\Models\Produto(['nome'=>'Camisa CK','valor'=>30,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat2->id]);
         $prod3->save();
+
+        $prod4 = new \App\Models\Produto(['nome'=>'Calça Pequena','valor'=>40,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat3->id]);
+        $prod4->save();
+
+        $prod5 = new \App\Models\Produto(['nome'=>'Calça Grande','valor'=>40,'foto'=>'barnis.jpg','descricao'=>'','categoria_id'=>$cat3->id]);
+        $prod5->save();
     }
 
     /**

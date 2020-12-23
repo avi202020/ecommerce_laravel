@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CodEcommerce</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    </head>
-    <body>
-        <h2>Categoria</h2>
+@extends('layout')
 
+@section('content')
+    @if(!empty($produtos))
+
+        <div class="col-2">
         @if( !empty($categorias) && count($categorias)>0)
-            <ul>
+            <div class="list-group">
+                <a href="{{route('categoria')}}" class="list-group-item list-group-item-action @if(empty($idcategoria)) active @endif">Todas</a>
                 @foreach($categorias as $cat)
-                    <li>{{$cat->descricao}}</li>
+                    <a href="{{route('categoria.byId',$cat->id)}}"
+                        class="list-group-item list-group-item-action @if($cat->id == $idcategoria) active @endif">
+                        {{$cat->descricao}}</a>
                 @endforeach
-            </ul>
+            </div>
         @endif
+        </div>
 
-        @if( !empty($produtos) && count($produtos)>0)
-            <ul>
-                @foreach($produtos as $prod)
-                    <li>{{$prod->nome}}</li>
-                @endforeach
-            </ul>
-        @endif
-    </body>
-</html>
+        <div class="col-10">
+        @include('_produtos',['produtos'=>$produtos])
+        </div>
+    @endif
+@endsection

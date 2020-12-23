@@ -1,13 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CodEcommerce</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    </head>
-    <body>
-        <h2>Cadastrar Cliente</h2>
-    </body>
-</html>
+@extends('layout')
+
+@section('content')
+    <div class="col-12">
+        <h2 class="mb-3">Cadastrar Cliente</h2>
+    </div>
+    <form action="" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" name="nome"/>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email"/>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" class="form-control" name="cpf"/>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" class="form-control" name="password"/>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" class="form-control" name="endereco"/>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" class="form-control" name="cidade"/>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" class="form-control" name="cep"/>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="uf">Estado</label>
+                    <input type="text" class="form-control" name="uf"/>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Cadastrar" class="btn btn-success btn-sm"/>
+    </form>
+@endsection
