@@ -5,6 +5,8 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\PagamentoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +36,8 @@ Route::match(['get','post'], '/carrinho', [CarrinhoController::class, 'index'])-
 Route::match(['get','post'], '/carrinho/{index}/destroy', [CarrinhoController::class, 'destroy'])->name('cart.destroy');
 
 Route::post('/carrinho/finalizar', [CarrinhoController::class, 'finish'])->name('cart.finish');
+
+Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos');
+Route::post('/pedidos/detalhes', [PedidosController::class, 'show'])->name('pedidos.show');
+Route::match(['get','post'], '/pedidos/pagar', [PagamentoController::class, 'store'])->name('payment');
+
