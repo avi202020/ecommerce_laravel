@@ -28,16 +28,19 @@ Route::match(['get','post'], '/cadastrar_post', [ClienteController::class, 'stor
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-
 Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 Route::match(['get','post'], '/{idproduto}/carrinho/adicionar', [CarrinhoController::class, 'store'])->name('cart.store');
 Route::match(['get','post'], '/carrinho', [CarrinhoController::class, 'index'])->name('cart.index');
 Route::match(['get','post'], '/carrinho/{index}/destroy', [CarrinhoController::class, 'destroy'])->name('cart.destroy');
 
-Route::post('/carrinho/finalizar', [CarrinhoController::class, 'finish'])->name('cart.finish');
+/* PAINEL CLIENTE */
+Route::group(['prefix'=>'painel','middleware'=>'auth'], function(){
+    Route::post('/carrinho/finalizar', [CarrinhoController::class, 'finish'])->name('cart.finish');
+    Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos');
+    Route::post('/pedidos/detalhes', [PedidosController::class, 'show'])->name('pedidos.show');
+    Route::match(['get','post'], '/pedidos/pagar', [PagamentoController::class, 'store'])->name('payment');
+});
 
-Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos');
-Route::post('/pedidos/detalhes', [PedidosController::class, 'show'])->name('pedidos.show');
-Route::match(['get','post'], '/pedidos/pagar', [PagamentoController::class, 'store'])->name('payment');
+
 

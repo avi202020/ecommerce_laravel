@@ -15,7 +15,7 @@ class LoginController extends Controller
         $cpf = preg_replace("/[^0-9]/","",$request->input("login"));
         $credential = ['login'=> $cpf, 'password'=> $request->input("password")];
 
-        if(Auth::attempt($credential) ){
+        if(Auth::attempt($credential)){
             return redirect()->route("home");
         }else{
             $request->session()->flash("err","CPF/Senha inválido");
