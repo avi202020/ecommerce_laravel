@@ -19,6 +19,9 @@ use App\Http\Controllers\PagamentoController;
 */
 
 Route::match(['get','post'], '/', [ProdutoController::class, 'index'])->name('home');
+Route::match(['get'], '/admin', function(){
+    return view('admin.index');
+});
 
 Route::match(['get','post'], '/categoria', [ProdutoController::class, 'categoria'])->name('categoria');
 Route::match(['get','post'], '/{id}/categoria', [ProdutoController::class, 'categoria'])->name('categoria.byId');

@@ -1,0 +1,10 @@
+Se cadastrar no heroku
+
+heroku login
+touch Procfile
+heroku create
+git remove -v
+git push heroku master
+heroku config:add APP_NAME="teste"
+heroku config:add APP_ENV="production"
+Create database on dashboard
