@@ -37,25 +37,26 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form>
+                    <form  action="{{route('admin.login')}}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" name="email" class="form-control" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Remember Me
+                                <input type="checkbox" name="remember"> Remember Me
                             </label>
                             <label class="pull-right">
                                 <a href="#">Forgotten Password?</a>
                             </label>
 
                         </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
+                        <input type="submit" value="Logar" class="btn btn-success btn-flat m-b-30 m-t-30"/>
                         <div class="social-login-content">
                             <div class="social-button">
                                 <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>

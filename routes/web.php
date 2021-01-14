@@ -7,6 +7,9 @@ use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminLoginController;
+use App\Models\Produto;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +22,15 @@ use App\Http\Controllers\PagamentoController;
 */
 
 Route::match(['get','post'], '/', [ProdutoController::class, 'index'])->name('home');
-Route::match(['get'], '/admin', function(){
-    return view('admin.index');
+Route::get('admin', [AdminController::class,'index'])->name('admin');
+Route::get('admin/login', [AdminLoginController::class,'index'])->name('admin.login');
+Route::post('admin/login', [AdminLoginController::class,'login'])->name('admin.login');
+Route::get('admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+
+Route::group(['prefix'=>'admin','middleware'=>'auth:admin'], function(){
+    Route::get('/produtos', function(){
+        return Produto::all();
+    })->name('admin.produtos'); 
 });
 
 Route::match(['get','post'], '/categoria', [ProdutoController::class, 'categoria'])->name('categoria');

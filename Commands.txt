@@ -8,3 +8,6 @@ git push heroku master
 heroku config:add APP_NAME="teste"
 heroku config:add APP_ENV="production"
 Create database on dashboard
+
+Run commands of laravel - need to be logged
+heroku run bash

@@ -23,6 +23,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                //if user is login on admin guard, and try go to login page, it redirects to admin
+                if($guard == 'admin'){
+                    return redirect()->route('admin');
+                }
+                //if user is login on web guard, and try go to login page, it redirects to home
                 return redirect(RouteServiceProvider::HOME);
             }
         }
