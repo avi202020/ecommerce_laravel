@@ -19,40 +19,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/cs-skin-elastic.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
 </head>
 <body class="bg-dark">
 
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container">
-            <div class="login-content">
-                <div class="login-logo">
-                    <a href="index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
-                    </a>
-                </div>
-                <div class="login-form">
-                    <form>
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" class="form-control" placeholder="Email">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-flat m-b-15">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    @yield('content')
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
+    <script src="{{asset('assets/admin/js/main.js')}}"></script>
 </body>
 </html>

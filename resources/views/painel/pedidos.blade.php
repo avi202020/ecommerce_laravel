@@ -1,11 +1,11 @@
-@extends("layout")
+@extends("frontend.layout.app")
 
 @section("scripts")
     <script>
         $(function(){
             $(".infoCompra").on('click', function(){
                 let id = $(this).attr("data-value");
-                $.post('{{route("pedidos.show")}}',{idpedido:id},(result)=>{
+                $.post('{{route("pedidos.show")}}',{_token: "{{ csrf_token() }}",idpedido:id},(result)=>{
                     $("#contentPedido").html(result);
                 });
             })

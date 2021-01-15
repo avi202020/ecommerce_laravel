@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Produto;
+use App\Http\Controllers\Controller;
 
 class ProdutoController extends Controller
 {
     public function index(Request $request){
         $produtos = Produto::all();
-        return view('home',compact('produtos'));
+        return view('frontend.home',compact('produtos'));
     }
 
     public function categoria(Request $request, $idcategoria = 0){
@@ -22,6 +23,6 @@ class ProdutoController extends Controller
         }
 
         $produtos = $queryProds->get();
-        return view('categoria',compact('categorias','produtos','idcategoria'));
+        return view('frontend.categoria',compact('categorias','produtos','idcategoria'));
     }
 }

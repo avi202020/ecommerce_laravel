@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('frontend.layout.app')
 
 @section('content')
     @if(!empty($produtos))
@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-10">
-        @include('_produtos',['produtos'=>$produtos])
+        @include('frontend._produtos',['produtos'=>$produtos])
         </div>
     @endif
 @endsection

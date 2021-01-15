@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -15,7 +16,7 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function destroy(Request $request){ 
+    public function destroy(Request $request){
         Auth::guard('admin')->logout();
         return redirect()->route("admin.login");
     }

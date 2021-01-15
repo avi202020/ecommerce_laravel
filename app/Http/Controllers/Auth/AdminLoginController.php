@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,8 @@ class AdminLoginController extends Controller
     public function index(){
         return view("admin.page-login");
     }
-    public function login(Request $request){
+
+    public function store(Request $request){
         $this->validate($request,[
             'email' => 'required|string',
             'password'=>'required'
@@ -30,8 +32,4 @@ class AdminLoginController extends Controller
         }
         return redirect()->back()->withInputs($request->only('email','remember'));
     }
-
-    
-
-
 }

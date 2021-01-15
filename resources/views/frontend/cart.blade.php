@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('frontend.layout.app')
 
 @section('content')
     <h3>Carrinho</h3>

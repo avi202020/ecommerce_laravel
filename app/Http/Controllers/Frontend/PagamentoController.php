@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use PagSeguro\Configuration\Configure;
+use App\Http\Controllers\Controller;
 
 class PagamentoController extends Controller
 {
@@ -32,6 +33,6 @@ class PagamentoController extends Controller
 
         $data['cart'] = session('cart');
 
-        return view('payment',$data);
+        return view('frontend.payment',$data);
     }
 }

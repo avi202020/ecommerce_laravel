@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Services\VendaService;
 use PagSeguro\Configuration\Configure;
+use App\Http\Controllers\Controller;
 
 class CarrinhoController extends Controller
 {
@@ -23,7 +24,7 @@ class CarrinhoController extends Controller
 
     public function index(Request $request){
         $carrinho = session('cart');
-        return view("cart",compact('carrinho'));
+        return view("frontend.cart",compact('carrinho'));
     }
 
     public function store(Request $request, $idproduto){

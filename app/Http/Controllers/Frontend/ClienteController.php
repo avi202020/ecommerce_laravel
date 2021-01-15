@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Services\ClienteService;
 use App\Models\Usuario;
 use App\Models\Endereco;
+use App\Http\Controllers\Controller;
 
 class ClienteController extends Controller
 {
     public function cadastrar(Request $request){
         $data = [];
-        return view('cadastrar',$data);
+        return view('frontend.cadastrar',$data);
     }
 
     public function store(Request $request){

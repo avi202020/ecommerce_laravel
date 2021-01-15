@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\ItensPedido;
+use App\Http\Controllers\Controller;
 use Auth;
 
 class PedidosController extends Controller

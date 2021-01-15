@@ -1,12 +1,12 @@
 <!-- Right Panel -->
 <div id="right-panel" class="right-panel">
 
-    @include('layouts.admin_header')
+    @include('admin.layout.header')
 
     @yield('content')
 
     <div class="clearfix"></div>
 
-    @include('layouts.admin_footer')
+    @include('admin.layout.footer')
 </div>
 <!-- /#right-panel -->
