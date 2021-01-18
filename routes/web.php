@@ -12,22 +12,25 @@ use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Models\Produto;
 
 /* FRONTEND */
-Route::match(['get','post'], '/', [ProdutoController::class, 'index'])->name('home');
+Route::group(['prefix'=>'/'], function(){
+    Route::match(['get','post'], '/', [ProdutoController::class, 'index'])->name('home');
 
-Route::match(['get','post'], 'categoria', [ProdutoController::class, 'categoria'])->name('categoria');
-Route::match(['get','post'], '{id}/categoria', [ProdutoController::class, 'categoria'])->name('categoria.byId');
+    Route::match(['get','post'], 'categoria', [ProdutoController::class, 'categoria'])->name('categoria');
+    Route::match(['get','post'], '{id}/categoria', [ProdutoController::class, 'categoria'])->name('categoria.byId');
 
-Route::match(['get','post'], 'cadastrar', [ClienteController::class, 'cadastrar'])->name('cadastrar');
-Route::match(['get','post'], 'cadastrar_post', [ClienteController::class, 'store'])->name('cadastrar.store');
+    Route::match(['get','post'], 'cadastrar', [ClienteController::class, 'cadastrar'])->name('cadastrar');
+    Route::match(['get','post'], 'cadastrar_post', [ClienteController::class, 'store'])->name('cadastrar.store');
 
-Route::match(['get','post'], '{idproduto}/carrinho/adicionar', [CarrinhoController::class, 'store'])->name('cart.store');
-Route::match(['get','post'], 'carrinho', [CarrinhoController::class, 'index'])->name('cart.index');
-Route::match(['get','post'], 'carrinho/{index}/destroy', [CarrinhoController::class, 'destroy'])->name('cart.destroy');
+    Route::match(['get','post'], '{idproduto}/carrinho/adicionar', [CarrinhoController::class, 'store'])->name('cart.store');
+    Route::match(['get','post'], 'carrinho', [CarrinhoController::class, 'index'])->name('cart.index');
+    Route::match(['get','post'], 'carrinho/{index}/destroy', [CarrinhoController::class, 'destroy'])->name('cart.destroy');
+});
 
 /* PAINEL CLIENTE */
 Route::get('login', [LoginController::class, 'index'])->name('login');
@@ -45,6 +48,11 @@ Route::group(['prefix'=>'painel','middleware'=>'auth'], function(){
 });
 
 /* PAINEL ADMIN */
+Route::get('password-reset', [ForgotPasswordController::class,'index'])->name('forgot.password');
+Route::post('password-reset', [ForgotPasswordController::class,'store'])->name('forgot.password');
+Route::get('reset-password/{token}', [ResetPasswordController::class,'index'])->name('reset.password');
+Route::post('reset-password/{token}', [ResetPasswordController::class,'store'])->name('reset.password');
+
 Route::group(['prefix'=>'admin'], function(){
     Route::get('login', [AdminLoginController::class,'index'])->name('admin.login');
     Route::post('login', [AdminLoginController::class,'store'])->name('admin.login');

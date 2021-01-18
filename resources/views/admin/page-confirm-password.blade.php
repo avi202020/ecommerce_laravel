@@ -10,11 +10,15 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form action="{{route('forgot.password')}}" method="POST" >
+                    <form action="{{route('reset.password',$tokenData->token)}}" method="POST" >
                         @csrf
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" required name="email" class="form-control" placeholder="Email">
+                            <label>Nova Senha</label>
+                            <input type="password" required name="password" class="form-control" placeholder="Senha">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirme Nova Senha</label>
+                            <input type="password" required name="password_confirm" class="form-control" placeholder="Confirme Senha">
                         </div>
                         <div class="form-group row">
                             <div class="col-10">
