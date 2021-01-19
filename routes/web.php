@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\PedidosController;
 use App\Http\Controllers\Frontend\PagamentoController;
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductsController;
 
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -64,9 +65,7 @@ Route::group(['prefix'=>'admin'], function(){
 Route::group(['prefix'=>'admin','middleware'=>'auth:admin'], function(){
     Route::get('/', [AdminController::class,'index'])->name('admin');
 
-    Route::get('/produtos', function(){
-        return Produto::all();
-    })->name('admin.produtos');
+    Route::resource('products',ProductsController::class);
 });
 
 
