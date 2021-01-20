@@ -1,3 +1,12 @@
+@component('mail::message')
+# Pedido para resetar senha
 
+Olá, {{$name}}
 
-<a href="{{route('reset.password',$link_url)}}" target="_BLANK">Clique aqui para redefinir a senha</a>
+@component('mail::button', ['url' => route('reset.password',$url)])
+Clique aqui para redefinir sua senha
+@endcomponent
+
+Atte,<br>
+{{ config('app.name') }}
+@endcomponent

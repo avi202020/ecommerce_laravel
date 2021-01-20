@@ -17,9 +17,10 @@ class ResetPassword extends Mailable
      *
      * @return void
      */
-    public function __construct($link_url)
+    public function __construct($link_url,$name)
     {
-        $this->link_url = $link_url;
+        $this->url = $link_url;
+        $this->name = $name;
     }
 
     /**
@@ -29,6 +30,9 @@ class ResetPassword extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.reset-password')->subject('Solicitação de Alteração de Senha Ecommerce');
+        return $this->markdown('emails.reset-password',[
+            'url' => $this->url,
+            'name' => $this->name
+        ])->subject('Solicitação de Alteração de Senha '.env('Ecommerce'));
     }
 }

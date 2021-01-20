@@ -24,25 +24,25 @@ class ForgotPasswordController extends Controller
         $user = Admin::where('email',$request->email)->first();
         if ( !$user ) return redirect()->back()->withErrors(['error' => '404']);
 
-        //create a new token to be sent to the user.
+        //create a new token to be sent to the user
         DB::table('password_resets')->insert([
             'email' => $request->email,
-            'token' => Str::random(60), //change 60 to any length you want
+            'token' => Str::random(60),
             'created_at' => Carbon::now()
         ]);
 
         $tokenData = DB::table('password_resets')->where('email', $request->email)->first();
 
         $token = $tokenData->token;
-        $email = $request->email; // or $email = $tokenData->email;
+        $name = $user->nome;
+        $email = $request->email;
 
-        Mail::to($email)->send(new ResetPassword($token));
+        try {
+            Mail::to($email)->send(new ResetPassword($token,$name));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
-        return route('reset.password',$token);
-        /**
-        * Send email to the email above with a link to your password reset
-        * something like url('password-reset/' . $token)
-        * Sending email varies according to your Laravel version. Very easy to implement
-        */
+        return redirect()->route('admin.login');
     }
 }
