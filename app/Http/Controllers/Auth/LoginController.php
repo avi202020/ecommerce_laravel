@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
@@ -9,18 +10,17 @@ use Auth;
 class LoginController extends Controller
 {
     public function index(Request $request){
-        return view("login");
+        return view("frontend.login");
     }
 
-    public function store(Request $request){
+    public function store(LoginRequest $request){
         $cpf = preg_replace("/[^0-9]/","",$request->input("login"));
         $credential = ['login'=> $cpf, 'password'=> $request->input("password")];
 
         if(Auth::attempt($credential)){
             return redirect()->route("home");
         }else{
-            $request->session()->flash("err","CPF/Senha inválido");
-            return redirect()->route("login");
+            return redirect()->back()->withErrors(['error' => 'CPF/Senha inválido']);
         }
 
         return view("login");

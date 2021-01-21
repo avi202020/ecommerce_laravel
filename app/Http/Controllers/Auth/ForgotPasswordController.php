@@ -13,36 +13,58 @@ use Hash;
 use Carbon\Carbon;
 use App\Models\Admin;
 use App\Mail\ResetPassword;
+use App\Http\Requests\ForgotPasswordRequest;
 
 class ForgotPasswordController extends Controller
 {
+    private $model,$view,$query,$url;
+
+	public function __construct()
+    {
+		$this->middleware(function ($request, $next) {
+            switch (\Request::route()->getPrefix()) {
+                case "/admin":
+                    $this->model = app('App\Models\Admin');
+                    $this->view = 'admin.page-forget';
+                    $this->query = $this->model::where('email',$request->email)->first();
+                    $this->url = 'admin.reset.password';
+                    break;
+                default:
+                    $this->model = app('App\Models\Usuario');
+                    $this->view = 'frontend.forget-password';
+                    $this->query = $this->model::where('login',preg_replace("/[^0-9]/","",$request->login))->first();
+                    $this->url = 'reset.password';
+                    break;
+            }
+            return $next($request);
+		});
+	}
+
     public function index(){
-        return view('admin.page-forget');
+        return view($this->view);
     }
 
-    public function store(Request $request){
-        $user = Admin::where('email',$request->email)->first();
-        if ( !$user ) return redirect()->back()->withErrors(['error' => '404']);
+    public function store(ForgotPasswordRequest $request){
+        $user = $this->query;
+        if ( !$user ) return redirect()->back()->withErrors(['error' => 'Email não localizado']);
 
-        //create a new token to be sent to the user
         DB::table('password_resets')->insert([
-            'email' => $request->email,
+            'email' => $user->email,
             'token' => Str::random(60),
             'created_at' => Carbon::now()
         ]);
 
-        $tokenData = DB::table('password_resets')->where('email', $request->email)->first();
+        $tokenData = DB::table('password_resets')->where('email', $user->email)->first();
 
-        $token = $tokenData->token;
         $name = $user->nome;
-        $email = $request->email;
+        $email = $user->email;
 
         try {
-            Mail::to($email)->send(new ResetPassword($token,$name));
+            Mail::to($email)->send(new ResetPassword(route($this->url,$tokenData->token),$name));
         } catch (\Throwable $th) {
             //throw $th;
         }
 
-        return redirect()->route('admin.login');
+        return redirect()->back()->with(['message'=>'Email enviado com sucesso','class'=>'success']);
     }
 }

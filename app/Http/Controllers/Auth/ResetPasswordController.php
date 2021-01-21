@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ConfirmPasswordRequest;
 use App\Models\Admin;
 use Hash;
 use Auth;
@@ -11,32 +12,49 @@ use DB;
 
 class ResetPasswordController extends Controller
 {
-    public function index($token)
+    private $model,$view,$guard,$url;
+
+	public function __construct()
     {
-        $tokenData = DB::table('password_resets')
-        ->where('token', $token)->first();
-        if ( !$tokenData ) return redirect()->to('home'); //redirect them anywhere you want if the token does not exist.
-        return view('admin.page-confirm-password',compact('tokenData'));
+		$this->middleware(function ($request, $next) {
+            switch (\Request::route()->getPrefix()) {
+                case "/admin":
+                    $this->model = app('App\Models\Admin');
+                    $this->view = 'admin.page-confirm-password';
+                    $this->guard = 'admin';
+                    $this->url = 'admin';
+                    break;
+                default:
+                    $this->model = app('App\Models\Usuario');
+                    $this->view = 'frontend.confirm-password';
+                    $this->guard = 'web';
+                    $this->url = 'home';
+                    break;
+            }
+            return $next($request);
+		});
     }
 
-    public function store(Request $request, $token)
+    public function index($token)
     {
-        //some validation
+        $tokenData = DB::table('password_resets')->where('token', $token)->first();
+        if ( !$tokenData ) return redirect()->to('home');
+        return view($this->view,compact('tokenData'));
+    }
+
+    public function store(ConfirmPasswordRequest $request, $token)
+    {
         $password = $request->password;
         $tokenData = DB::table('password_resets')->where('token', $token)->first();
-
-        $user = Admin::where('email', $tokenData->email)->first();
-        if ( !$user ) return redirect()->to('home'); //or wherever you want
+        $user = $this->model::where('email', $tokenData->email)->first();
+        if ( !$user ) return redirect()->to('home');
 
         $user->password = Hash::make($password);
-        $user->update(); //or $user->save();
+        $user->update();
 
-        //do we log the user directly or let them login and try their password for the first time ? if yes
-        Auth::guard('admin')->login($user);
+        Auth::guard($this->guard)->login($user);
 
-        // If the user shouldn't reuse the token later, delete the token
         DB::table('password_resets')->where('email', $user->email)->delete();
-        return redirect()->route('admin');
-        //redirect where we want according to whether they are logged in or not.
+        return redirect()->route($this->url);
     }
 }

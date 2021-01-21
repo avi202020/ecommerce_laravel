@@ -37,16 +37,11 @@
                     </div>
                 @endif
 
-                @if($message = Session::get('err'))
-                    <div class="col-12">
-                        <div class="alert alert-danger">{{$message}}</div>
-                    </div>
-                @endif
-                @if($message = Session::get('ok'))
-                    <div class="col-12">
-                        <div class="alert alert-success">{{$message}}</div>
-                    </div>
-                @endif
+                <div class="col-8 offset-2">
+                    @include('includes.error_messages')
+                    @include('includes.alert_messages')
+                </div>
+
                 <!-- Section -->
                 @yield("content")
             </div>

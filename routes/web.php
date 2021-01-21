@@ -31,6 +31,11 @@ Route::group(['prefix'=>'/'], function(){
     Route::match(['get','post'], '{idproduto}/carrinho/adicionar', [CarrinhoController::class, 'store'])->name('cart.store');
     Route::match(['get','post'], 'carrinho', [CarrinhoController::class, 'index'])->name('cart.index');
     Route::match(['get','post'], 'carrinho/{index}/destroy', [CarrinhoController::class, 'destroy'])->name('cart.destroy');
+
+    Route::get('forgot-password',[ForgotPasswordController::class,'index'])->name('forgot.password');
+    Route::post('forgot-password',[ForgotPasswordController::class,'store'])->name('forgot.password');
+    Route::get('reset-password/{token}', [ResetPasswordController::class,'index'])->name('reset.password');
+    Route::post('reset-password/{token}', [ResetPasswordController::class,'store'])->name('reset.password');
 });
 
 /* PAINEL CLIENTE */
@@ -49,17 +54,14 @@ Route::group(['prefix'=>'painel','middleware'=>'auth'], function(){
 });
 
 /* PAINEL ADMIN */
-Route::get('password-reset', [ForgotPasswordController::class,'index'])->name('forgot.password');
-Route::post('password-reset', [ForgotPasswordController::class,'store'])->name('forgot.password');
-Route::get('reset-password/{token}', [ResetPasswordController::class,'index'])->name('reset.password');
-Route::post('reset-password/{token}', [ResetPasswordController::class,'store'])->name('reset.password');
-
 Route::group(['prefix'=>'admin'], function(){
     Route::get('login', [AdminLoginController::class,'index'])->name('admin.login');
     Route::post('login', [AdminLoginController::class,'store'])->name('admin.login');
     Route::get('logout', [AdminController::class, 'destroy'])->name('admin.logout');
-    Route::get('forgot-password',[ForgotPasswordController::class,'index'])->name('forgot.password');
-    Route::post('forgot-password',[ForgotPasswordController::class,'store'])->name('forgot.password');
+    Route::get('forgot-password',[ForgotPasswordController::class,'index'])->name('admin.forgot.password');
+    Route::post('forgot-password',[ForgotPasswordController::class,'store'])->name('admin.forgot.password');
+    Route::get('reset-password/{token}', [ResetPasswordController::class,'index'])->name('admin.reset.password');
+    Route::post('reset-password/{token}', [ResetPasswordController::class,'store'])->name('admin.reset.password');
 });
 
 Route::group(['prefix'=>'admin','middleware'=>'auth:admin'], function(){

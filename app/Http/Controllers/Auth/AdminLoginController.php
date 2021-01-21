@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AdminLoginRequest;
 
 class AdminLoginController extends Controller
 {
@@ -17,12 +18,7 @@ class AdminLoginController extends Controller
         return view("admin.page-login");
     }
 
-    public function store(Request $request){
-        $this->validate($request,[
-            'email' => 'required|string',
-            'password'=>'required'
-        ]);
-
+    public function store(AdminLoginRequest $request){
         $credentials = ['email'=> $request->email , 'password'=>$request->password];
 
         $auth = Auth::guard('admin')->attempt($credentials,$request->remember);
@@ -30,6 +26,8 @@ class AdminLoginController extends Controller
         if($auth){
             return redirect()->intended(route('admin'));
         }
-        return redirect()->back()->withInputs($request->only('email','remember'));
+
+        $errors = [$request->email => "E-mail ou senha incorretos, tente novamente."];
+        return redirect()->back()->withInput($request->all)->withErrors($errors);
     }
 }

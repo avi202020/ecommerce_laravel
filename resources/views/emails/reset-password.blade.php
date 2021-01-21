@@ -3,7 +3,7 @@
 
 Olá, {{$name}}
 
-@component('mail::button', ['url' => route('reset.password',$url)])
+@component('mail::button', ['url' => $url])
 Clique aqui para redefinir sua senha
 @endcomponent
 

@@ -9,8 +9,16 @@
                         <img class="align-content" src="{{asset('assets/admin/images/logo.png')}}" alt="">
                     </a>
                 </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            @include('includes.error_messages')
+                            @include('includes.alert_messages')
+                        </div>
+                    </div>
+                </div>
                 <div class="login-form">
-                    <form action="{{route('reset.password',$tokenData->token)}}" method="POST" >
+                    <form action="{{route('admin.reset.password',$tokenData->token)}}" method="POST" >
                         @csrf
                         <div class="form-group">
                             <label>Nova Senha</label>
@@ -18,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label>Confirme Nova Senha</label>
-                            <input type="password" required name="password_confirm" class="form-control" placeholder="Confirme Senha">
+                            <input type="password" required name="password_confirmation" class="form-control" placeholder="Confirme Senha">
                         </div>
                         <div class="form-group row">
                             <div class="col-10">

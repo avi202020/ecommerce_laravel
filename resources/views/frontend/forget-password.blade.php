@@ -12,23 +12,24 @@
 
 @section('content')
     <div class="col-8 offset-2">
-        <h2 class="mb-3">Login</h2>
+        <h2 class="mb-3">Esqueci Senha</h2>
 
-        <form action="{{route('login.store')}}" method="POST">
+        <form action="{{route('forgot.password')}}" method="POST">
             @csrf
 
             <div class="form-group">
-                <label for="login">Login</label>
+                <label for="login">Informe seu cpf para enviarmos um email para redefinir sua senha</label>
                 <input type="text" id="cpf" class="form-control" name="login"/>
             </div>
 
-            <div class="form-group">
-                <label for="password">Senha</label>
-                <input type="password" class="form-control" name="password"/>
+            <div class="form-group row">
+                <div class="col-2">
+                    <input type="submit" value="Enviar" class="btn btn-lg btn-primary"/>
+                </div>
+                <div class="col-2">
+                    <a href="{{route('login')}}" class="btn btn-danger mt-1"><i class="fa fa-arrow-left"></i></a>
+                </div>
             </div>
-
-            <input type="submit" value="Logar" class="btn btn-lg btn-primary"/>
-            <a href="{{route('forgot.password')}}" class="btn btn-sm btn-info">Esqueci Senha</a>
 
         </form>
     </div>
