@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title> {{env('APP_NAME')}} </title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,40 +28,43 @@
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
-   <style>
-    #weatherWidget .currentDesc {
-        color: #ffffff!important;
-    }
-        .traffic-chart {
-            min-height: 335px;
-        }
-        #flotPie1  {
-            height: 150px;
-        }
-        #flotPie1 td {
-            padding:3px;
-        }
-        #flotPie1 table {
-            top: 20px!important;
-            right: -10px!important;
-        }
-        .chart-container {
-            display: table;
-            min-width: 270px ;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        #flotLine5  {
-             height: 105px;
-        }
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
-        #flotBarChart {
-            height: 150px;
+    <style>
+        #weatherWidget .currentDesc {
+            color: #ffffff!important;
         }
-        #cellPaiChart{
-            height: 160px;
-        }
+            .traffic-chart {
+                min-height: 335px;
+            }
+            #flotPie1  {
+                height: 150px;
+            }
+            #flotPie1 td {
+                padding:3px;
+            }
+            #flotPie1 table {
+                top: 20px!important;
+                right: -10px!important;
+            }
+            .chart-container {
+                display: table;
+                min-width: 270px ;
+                text-align: left;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            #flotLine5  {
+                height: 105px;
+            }
+
+            #flotBarChart {
+                height: 150px;
+            }
+            #cellPaiChart{
+                height: 160px;
+            }
 
     </style>
 </head>

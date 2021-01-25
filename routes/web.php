@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\PedidosController;
 use App\Http\Controllers\Frontend\PagamentoController;
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminAcessController;
 use App\Http\Controllers\Admin\ProductsController;
 
 use App\Http\Controllers\Auth\AdminLoginController;
@@ -67,6 +68,7 @@ Route::group(['prefix'=>'admin'], function(){
 Route::group(['prefix'=>'admin','middleware'=>'auth:admin'], function(){
     Route::get('/', [AdminController::class,'index'])->name('admin');
 
+    Route::resource('admins',AdminAcessController::class);
     Route::resource('products',ProductsController::class);
 });
 

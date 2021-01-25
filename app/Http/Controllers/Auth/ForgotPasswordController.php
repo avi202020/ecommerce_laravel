@@ -46,7 +46,7 @@ class ForgotPasswordController extends Controller
 
     public function store(ForgotPasswordRequest $request){
         $user = $this->query;
-        if ( !$user ) return redirect()->back()->withErrors(['error' => 'Email não localizado']);
+        if ( !$user ) return redirect()->back()->withErrors(['error' => 'Dados não localizados!']);
 
         DB::table('password_resets')->insert([
             'email' => $user->email,

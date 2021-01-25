@@ -21,15 +21,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Donna Snider</td>
-                                    <td>Customer Support</td>
-                                    <td>New York</td>
-                                    <td>
-                                        <a href="{{route('products.edit',1)}}" class="btn btn-primary btn-sm">Editar</a>
-                                        <a href="{{route('products.edit',1)}}" class="btn btn-danger btn-sm">Excluir</a>
-                                    </td>
-                                </tr>
+                                @if(!empty($products))
+                                    @foreach($products as $prod)
+                                        <tr>
+                                            <td>{{$prod->nome}}</td>
+                                            <td>{{$prod->category->descricao}}</td>
+                                            <td>{{$prod->valor}}</td>
+                                            <td>
+                                                <a href="{{route('products.edit',1)}}" class="btn btn-primary btn-sm">Editar</a>
+                                                <a href="{{route('products.destroy',1)}}" class="btn btn-danger btn-sm">Excluir</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+
                             </tbody>
                         </table>
                     </div>

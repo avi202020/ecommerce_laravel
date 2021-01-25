@@ -3,6 +3,7 @@
 
     @include('admin.layout.header')
 
+
     @yield('content')
 
     <div class="clearfix"></div>
