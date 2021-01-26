@@ -4,170 +4,68 @@
 <div class="content">
     <div class="animated fadeIn">
 
-        <div class="row">
+        @include('includes.alert_messages')
+        @include('includes.error_messages')
 
-            <div class="col-xs-6 col-sm-6">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Masked Input</strong> <small> Small Text Mask</small>
+                        <strong>{{$title}}</strong>
+                        <a href="{{route('products.index')}}" class="btn btn-danger btn-sm fr">Voltar</a>
                     </div>
                     <div class="card-body card-block">
-                        <div class="form-group">
-                            <label class=" form-control-label">Date input</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                <input class="form-control">
+                        <form method="POST" action="{{route('products.update',$produto->id)}}" enctype='multipart/form-data'>
+                            <input type="hidden" name="_method" value="PUT">
+                            @csrf
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label for="nome" class="form-control-label">Nome</label>
+                                    <input type="text" name="nome" class="form-control @if($errors->any() && empty(old('nome'))) is-invalid @endif" value="{{old('nome',$produto->nome)}}">
+                                </div>
                             </div>
-                            <small class="form-text text-muted">ex. 99/99/9999</small>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Phone input</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                                <input class="form-control">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label for="company" class="form-control-label">Categoria</label>
+                                    <select name="categoria_id" class="form-control @if($errors->any() && empty(old('categoria_id'))) select-is-invalid @endif" name="categoria_id">
+                                        <option value="">Selecione uma categoria</option>
+                                        @if(!empty($categorias))
+                                            @foreach($categorias as $cat)
+                                                <option value="{{$cat->id}}" @if(old('categoria_id',$produto->categoria_id)==$cat->id) selected @endif>{{$cat->descricao}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
                             </div>
-                            <small class="form-text text-muted">ex. (999) 999-9999</small>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Taxpayer Identification Numbers</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                <input class="form-control">
+                            <div class="form-group row">
+                                <div class="col col-md-3">
+                                    <label for="descricao" class="form-control-label">Descrição</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="descricao" rows="10" class="form-control @if($errors->any() && empty(old('descricao'))) is-invalid @endif">{{old('descricao',$produto->descricao)}}</textarea>
+                                </div>
                             </div>
-                            <small class="form-text text-muted">ex. 99-9999999</small>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Social Security Number</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                                <input class="form-control">
+                            <div class="form-group row">
+                                <div class="col col-md-4">
+                                    <label for="valor" class="form-control-label">Valor</label>
+                                    <input type="text" name="valor" value="{{old('valor',$produto->valor)}}" class="form-control valor @if($errors->any() && empty(old('valor'))) is-invalid @endif">
+                                </div>
+                                <div class="col col-md-5">
+                                    <label for="foto" class="form-control-label">Imagem</label>
+                                    <input type="file" onchange="loadFile(event)" name="foto" class="form-control input-file @if($errors->any() && empty(old('foto'))) is-invalid @endif">
+                                </div>
+                                <div class="col col-md-3 border-orange">
+                                    <img class="input-img" src="{{$produto->foto}}"/>
+                                </div>
                             </div>
-                            <small class="form-text text-muted">ex. 999-99-9999</small>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Eye Script</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                <input class="form-control">
+                            <div class="form-group row">
+                                <div class="col-12 fr">
+                                    <button type="submit" class="btn btn-md btn-primary fr">Salvar</button>
+                                </div>
                             </div>
-                            <small class="form-text text-muted">ex. ~9.99 ~9.99 999</small>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Credit Card Number</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
-                                <input class="form-control">
-                            </div>
-                            <small class="form-text text-muted">ex. 9999 9999 9999 9999</small>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Standard Select</strong>
-                    </div>
-                    <div class="card-body">
-
-                        <select data-placeholder="Choose a Country..." class="standardSelect" tabindex="1">
-                        <option value="" label="default"></option>
-                        <option value="United States">United States</option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="Afghanistan">Afghanistan</option>
-                        <option value="Aland Islands">Aland Islands</option>
-                        <option value="Albania">Albania</option>
-                        <option value="Algeria">Algeria</option>
-                        <option value="American Samoa">American Samoa</option>
-                        <option value="Andorra">Andorra</option>
-                        <option value="Angola">Angola</option>
-                        <option value="Anguilla">Anguilla</option>
-                        <option value="Antarctica">Antarctica</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <strong class="card-title">Multi Select</strong>
-                </div>
-                <div class="card-body">
-
-                    <select data-placeholder="Choose a country..." multiple class="standardSelect">
-                    <option value="" label="default"></option>
-                    <option value="United States">United States</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="Afghanistan">Afghanistan</option>
-                    <option value="Aland Islands">Aland Islands</option>
-                    <option value="Albania">Albania</option>
-                    <option value="Algeria">Algeria</option>
-                    <option value="American Samoa">American Samoa</option>
-                    <option value="Andorra">Andorra</option>
-                    <option value="Angola">Angola</option>
-                    <option value="Anguilla">Anguilla</option>
-                    <option value="Antarctica">Antarctica</option>
-                </select>
-
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <strong class="card-title">Multi Select with Groups</strong>
-            </div>
-            <div class="card-body">
-                <select data-placeholder="Your Favorite Football Team" multiple class="standardSelect" tabindex="5">
-                    <option value="" label="default"></option>
-                    <optgroup label="NFC EAST">
-                        <option>Dallas Cowboys</option>
-                        <option>New York Giants</option>
-                        <option>Philadelphia Eagles</option>
-                        <option>Washington Redskins</option>
-                    </optgroup>
-                    <optgroup label="NFC NORTH">
-                        <option>Chicago Bears</option>
-                        <option>Detroit Lions</option>
-                        <option>Green Bay Packers</option>
-                        <option>Minnesota Vikings</option>
-                    </optgroup>
-                    <optgroup label="NFC SOUTH">
-                        <option>Atlanta Falcons</option>
-                        <option>Carolina Panthers</option>
-                        <option>New Orleans Saints</option>
-                        <option>Tampa Bay Buccaneers</option>
-                    </optgroup>
-                    <optgroup label="NFC WEST">
-                        <option>Arizona Cardinals</option>
-                        <option>St. Louis Rams</option>
-                        <option>San Francisco 49ers</option>
-                        <option>Seattle Seahawks</option>
-                    </optgroup>
-                    <optgroup label="AFC EAST">
-                        <option>Buffalo Bills</option>
-                        <option>Miami Dolphins</option>
-                        <option>New England Patriots</option>
-                        <option>New York Jets</option>
-                    </optgroup>
-                    <optgroup label="AFC NORTH">
-                        <option>Baltimore Ravens</option>
-                        <option>Cincinnati Bengals</option>
-                        <option>Cleveland Browns</option>
-                        <option>Pittsburgh Steelers</option>
-                    </optgroup>
-                    <optgroup label="AFC SOUTH">
-                        <option>Houston Texans</option>
-                        <option>Indianapolis Colts</option>
-                        <option>Jacksonville Jaguars</option>
-                        <option>Tennessee Titans</option>
-                    </optgroup>
-                    <optgroup label="AFC WEST">
-                        <option>Denver Broncos</option>
-                        <option>Kansas City Chiefs</option>
-                        <option>Oakland Raiders</option>
-                        <option>San Diego Chargers</option>
-                    </optgroup>
-                </select>
             </div>
         </div>
     </div>

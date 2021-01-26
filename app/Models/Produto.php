@@ -12,4 +12,12 @@ class Produto extends ModelDefault
     {
         return $this->belongsTo(Categoria::class,'categoria_id');
     }
+
+    public function setValorAttribute($value){
+        $this->attributes["valor"] = str_replace(',','.', str_replace('.','', $value));
+    }
+
+    public function getFotoAttribute($value){
+        return url('storage/'.$value);
+    }
 }

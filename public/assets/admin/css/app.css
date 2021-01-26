@@ -1,0 +1,15 @@
+.select-is-invalid {
+    border-color: #dc3545;
+}
+
+.input-img {
+    width: 100%;
+}
+
+.border-orange {
+    border-color: #ff5c33;
+}
+
+.fr {
+    float: right;
+}

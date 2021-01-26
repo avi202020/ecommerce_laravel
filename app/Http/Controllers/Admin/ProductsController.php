@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
+use Illuminate\Support\Facades\Storage;
+use App\Services\UploadService;
 
 use App\Models\Produto;
 use App\Models\Categoria;
@@ -26,7 +28,13 @@ class ProductsController extends Controller
 
     public function store(ProductsRequest $request)
     {
-        dd($request->all());
+        $produto = new Produto($request->all());
+        if ($request->hasFile('foto')) {
+            $path = UploadService::uploadImage($request->file('foto'), 'produtos');
+            $produto->foto = $path;
+        }
+        $produto->save();
+        return redirect()->route('products.index')->with(['class'=>'success','message'=>'Produto cadastrado com sucesso']);
     }
 
     public function show($id)
@@ -36,16 +44,34 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
-        return view('admin.products.edit');
+        $produto = Produto::find($id);
+        if(empty($produto)){
+            return redirect()->route('products.index')->withErrors(['error' => 'Produto não localizado']);
+        }
+        $title = 'Editanto Produto : #'.$produto->id.' - '.$produto->nome;
+        $categorias = Categoria::all();
+        return view('admin.products.edit',compact('title','produto','categorias'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductsRequest $request, $id)
     {
-        //
+        $produto = Produto::find($id);
+        $produto->update($request->all());
+        if ($request->hasFile('foto')) {
+            $path = UploadService::uploadImage($request->file('foto'), 'produtos');
+            $produto->foto = $path;
+            $produto->save();
+        }
+        return redirect()->route('products.edit',$produto->id)->with(['class'=>'success','message'=>'Produto editado com sucesso']);
     }
 
     public function destroy($id)
     {
-        //
+        $produto = Produto::find($id);
+        if(empty($produto)){
+            return redirect()->route('products.index')->withErrors(['error' => 'Produto não localizado']);
+        }
+        $produto->delete();
+        return redirect()->route('products.index')->with(['class'=>'success','message'=>'Produto deletado com sucesso']);
     }
 }

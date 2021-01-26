@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="{{asset('assets/admin/css/cs-skin-elastic.css')}}">
     <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/app.css')}}">
 
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -35,36 +36,36 @@
         #weatherWidget .currentDesc {
             color: #ffffff!important;
         }
-            .traffic-chart {
-                min-height: 335px;
-            }
-            #flotPie1  {
-                height: 150px;
-            }
-            #flotPie1 td {
-                padding:3px;
-            }
-            #flotPie1 table {
-                top: 20px!important;
-                right: -10px!important;
-            }
-            .chart-container {
-                display: table;
-                min-width: 270px ;
-                text-align: left;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-            #flotLine5  {
-                height: 105px;
-            }
+        .traffic-chart {
+            min-height: 335px;
+        }
+        #flotPie1  {
+            height: 150px;
+        }
+        #flotPie1 td {
+            padding:3px;
+        }
+        #flotPie1 table {
+            top: 20px!important;
+            right: -10px!important;
+        }
+        .chart-container {
+            display: table;
+            min-width: 270px ;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        #flotLine5  {
+            height: 105px;
+        }
 
-            #flotBarChart {
-                height: 150px;
-            }
-            #cellPaiChart{
-                height: 160px;
-            }
+        #flotBarChart {
+            height: 150px;
+        }
+        #cellPaiChart{
+            height: 160px;
+        }
 
     </style>
 </head>
@@ -75,12 +76,14 @@
     @include('admin.layout.rightpanel')
 
     @yield('scripts')
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="{{asset('assets/admin/js/main.js')}}"></script>
+    <script src="{{asset('assets/admin/js/app.js')}}"></script>
 
     <!--  Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>

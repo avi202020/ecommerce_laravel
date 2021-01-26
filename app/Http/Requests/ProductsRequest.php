@@ -27,17 +27,20 @@ class ProductsRequest extends FormRequest
         if($request->isMethod('post')){
             return [
                 'nome'=>'required',
+                'categoria_id'=>'required',
                 'valor'=>'required',
-                'foto'=>'required',
+                'foto'=>'required|mimes:jpg,jpeg,png',
                 'descricao'=>'required',
-                'categoria_id'=>'required'
             ];
         }else{
             return [
-                //
+                'nome'=>'required',
+                'categoria_id'=>'required',
+                'valor'=>'required',
+                'descricao'=>'required',
+                'foto'=>'mimes:jpg,jpeg,png',
             ];
         }
-
     }
 
     public function messages(){
@@ -45,6 +48,7 @@ class ProductsRequest extends FormRequest
             'nome.required' => 'Nome do produto é obrigatório',
             'valor.required' => 'Valor do produto é obrigatório',
             'foto.required' => 'Imagem do produto é obrigatório',
+            'foto.mimes' => 'Imagem do produto em formato inválido, formatos aceitos: jpg,jpeg,png',
             'descricao.required' => 'Descrição do produto é obrigatório',
             'categoria_id.required' => 'Categoria do produto é obrigatório',
         ];
