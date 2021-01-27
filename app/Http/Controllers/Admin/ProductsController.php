@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
-use Illuminate\Support\Facades\Storage;
 use App\Services\UploadService;
 
 use App\Models\Produto;

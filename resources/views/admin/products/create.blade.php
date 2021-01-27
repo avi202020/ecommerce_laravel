@@ -14,7 +14,7 @@
                         <a href="{{route('products.index')}}" class="btn btn-danger btn-sm" style="float:right">Voltar</a>
                     </div>
                     <div class="card-body card-block">
-                        <form method="POST" action="{{route('products.update',$produto->id)}}" enctype='multipart/form-data'>
+                        <form method="POST" action="{{route('products.store')}}" enctype='multipart/form-data'>
                             @csrf
                             <div class="form-group row">
                                 <div class="col-12">

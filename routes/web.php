@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\PagamentoController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminAcessController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\CategoryController;
 
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -70,6 +71,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth:admin'], function(){
 
     Route::resource('admins',AdminAcessController::class);
     Route::resource('products',ProductsController::class);
+    Route::resource('categories',CategoryController::class);
 });
 
 

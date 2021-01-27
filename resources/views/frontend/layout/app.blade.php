@@ -37,10 +37,8 @@
                     </div>
                 @endif
 
-                <div class="col-8 offset-2">
-                    @include('includes.error_messages')
-                    @include('includes.alert_messages')
-                </div>
+                @include('includes.error_messages')
+                @include('includes.alert_messages')
 
                 <!-- Section -->
                 @yield("content")
