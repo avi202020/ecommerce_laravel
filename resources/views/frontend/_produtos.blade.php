@@ -1,5 +1,4 @@
 @if(!empty($produtos))
-    <div class="row">
     @foreach($produtos as $prod)
         <div class="col-3 mb-3">
             <div class="card">
@@ -11,5 +10,4 @@
             </div>
         </div>
     @endforeach
-    </div>
 @endif

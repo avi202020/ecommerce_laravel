@@ -13,9 +13,11 @@ class Admin extends ModelDefault implements Authenticatable
 
     protected $guard = 'admin';
 
-    protected $table = "admins";
+    protected $table = 'admins';
 
-    protected $fillable = ['email','password','nome'];
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['email','password','nome','image'];
 
     public function getAuthIdentifierName(){
         return 'email';
@@ -34,4 +36,12 @@ class Admin extends ModelDefault implements Authenticatable
     public function setRememberToken($value){}
 
     public function getRememberTokenName(){}
+
+    public function setPasswordAttribute($value){
+        $this->attributes["password"] = \Hash::make($value);
+    }
+
+    public function getImageAttribute($value){
+        return url($value);
+    }
 }

@@ -25,6 +25,8 @@ class AlterTableUsuariosAddColumnEmail extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('usuarios', function (Blueprint $table) {
+            $table->string('email',150);
+        });
     }
 }
