@@ -14,7 +14,7 @@ class AlterTableAdminsAddImageColumn extends Migration
     public function up()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('nome');
+            $table->string('image')->nullable()->default('')->after('nome');
         });
     }
 
@@ -26,7 +26,7 @@ class AlterTableAdminsAddImageColumn extends Migration
     public function down()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('nome');
+            $table->string('image')->nullable()->default('')->after('nome');
         });
     }
 }
