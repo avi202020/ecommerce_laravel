@@ -28,8 +28,5 @@ class AlterTableAdminsAddImageColumn extends Migration
         Schema::table('admins', function (Blueprint $table) {
             $table->string('image',150)->after('nome');
         });
-
-        $prod5 = new \App\Models\Admin(['nome'=>'Admin','email'=>'admin@a.com','image'=>'barnis.jpg','password'=>\Hash::make('123')]);
-        $prod5->save();
     }
 }
