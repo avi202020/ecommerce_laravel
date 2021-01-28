@@ -14,7 +14,7 @@ class AlterTableAdminsAddImageColumn extends Migration
     public function up()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->string('image',150)->after('nome');
+            $table->string('image')->nullable()->after('nome');
         });
     }
 
