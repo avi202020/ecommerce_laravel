@@ -19,7 +19,7 @@ class AdminLoginController extends Controller
     }
 
     public function store(AdminLoginRequest $request){
-        $credentials = ['email'=> $request->email , 'password'=>$request->password];
+        $credentials = ['email'=> $request->email , 'password'=>$request->password, 'status'=>1];
 
         $auth = Auth::guard('admin')->attempt($credentials,$request->remember);
 

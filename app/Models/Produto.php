@@ -18,6 +18,6 @@ class Produto extends ModelDefault
     }
 
     public function getFotoAttribute($value){
-        return url('storage/'.$value);
+        return url($value);
     }
 }

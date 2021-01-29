@@ -20,9 +20,16 @@
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             @csrf
                             <div class="form-group row">
-                                <div class="col-12">
+                                <div class="col-9">
                                     <label for="nome" class="form-control-label">Nome</label>
                                     <input type="text" name="nome" class="form-control @if($errors->any() && empty(old('nome'))) is-invalid @endif" value="{{old('nome',$user->nome)}}">
+                                </div>
+                                <div class="col-3">
+                                    <label for="status" class="form-control-label">Status</label>
+                                    <select name="status" class="form-control">
+                                        <option value="1" @if(old('status',$user->status)==1) selected @endif>Ativo</option>
+                                        <option value="0" @if(old('status',$user->status)==0) selected @endif>Inativo</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">

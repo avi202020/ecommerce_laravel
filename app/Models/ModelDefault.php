@@ -28,4 +28,8 @@ class ModelDefault extends Model
             throw new \Exception($e->getMessage());
         }
     }
+
+    public function getImageAttribute($value){
+        return url($value);
+    }
 }

@@ -7,7 +7,7 @@ class Usuario extends ModelDefault implements Authenticatable
 {
     protected $table = "usuarios";
 
-    protected $fillable = ['login','email','password','nome'];
+    protected $fillable = ['login','email','password','nome','status','image'];
 
     public function getAuthIdentifierName(){
         return 'login';
@@ -31,4 +31,9 @@ class Usuario extends ModelDefault implements Authenticatable
         $value = preg_replace("/[^0-9]/","",$login);
         $this->attributes["login"] = $value;
     }
+
+    public function setPasswordAttribute($value){
+        $this->attributes["password"] = \Hash::make($value);
+    }
+
 }

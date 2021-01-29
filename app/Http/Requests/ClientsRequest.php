@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class AdminAccessCrudRequest extends FormRequest
+class ClientsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,7 @@ class AdminAccessCrudRequest extends FormRequest
     {
         if($request->isMethod('post')){
             return [
+                'login'=>'required',
                 'nome'=>'required',
                 'status'=>'required',
                 'email'=>'required|email|unique:admins',
@@ -34,9 +35,10 @@ class AdminAccessCrudRequest extends FormRequest
             ];
         }else{
             return [
+                'login'=>'required',
                 'nome'=>'required',
                 'status'=>'required',
-                'email'=>'required|email|unique:admins,email,'.$request->user_id,
+                'email'=>'required|email|unique:usuarios,email,'.$request->user_id,
                 'image'=>'mimes:jpg,jpeg,png',
                 'password'=>'nullable|min:6',
             ];
@@ -45,15 +47,16 @@ class AdminAccessCrudRequest extends FormRequest
 
     public function messages(){
         return [
-            'nome.required' => 'Nome do usuário é obrigatório',
-            'email.required' => 'Email do usuário é obrigatório',
-            'status.required' => 'Status do usuário é obrigatório',
-            'email.email' => 'Email do usuário em formato incorreto',
+            'login.required' => 'CPF para login é obrigatório',
+            'nome.required' => 'Nome do cliente é obrigatório',
+            'email.required' => 'Email do cliente é obrigatório',
+            'status.required' => 'Status do cliente é obrigatório',
+            'email.email' => 'Email do cliente em formato incorreto',
             'email.unique' => 'Este email encontra-se em uso na base de dados',
-            'password.required' => 'Senha do usuário é obrigatório',
-            'password.min' => 'Senha do usuário precisa ter no mínimo 6 caracteres',
-            'image.required' => 'Imagem do usuário é obrigatório',
-            'image.mimes' => 'Imagem do usuário em formato incorreto, formatos aceitos: jpg,jpeg,png',
+            'password.min' => 'Senha do cliente precisa ter no mínimo 6 caracteres',
+            'password.required' => 'Senha do cliente precisa ter no mínimo 6 caracteres',
+            'image.required' => 'Imagem do cliente é obrigatório',
+            'image.mimes' => 'Imagem do cliente em formato incorreto, formatos aceitos: jpg,jpeg,png',
         ];
     }
 }

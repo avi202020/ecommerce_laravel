@@ -17,7 +17,7 @@ class Admin extends ModelDefault implements Authenticatable
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['email','password','nome','image'];
+    protected $fillable = ['email','password','nome','image','status'];
 
     public function getAuthIdentifierName(){
         return 'email';
@@ -39,9 +39,5 @@ class Admin extends ModelDefault implements Authenticatable
 
     public function setPasswordAttribute($value){
         $this->attributes["password"] = \Hash::make($value);
-    }
-
-    public function getImageAttribute($value){
-        return url($value);
     }
 }

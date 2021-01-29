@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title">{{$title}}</strong>
-                        <a href="{{route('admins.create')}}" class="btn btn-info btn-sm fr">Novo</a>
+                        <a href="{{route('clients.create')}}" class="btn btn-info btn-sm fr">Novo</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-bordered">
@@ -24,17 +24,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($users))
-                                    @foreach($users as $user)
+                                @if(!empty($clients))
+                                    @foreach($clients as $user)
                                         <tr>
                                             <td>{{$user->nome}}</td>
                                             <td>{{ $user->status == 1 ? 'Ativo' : 'Inativo'}}</td>
                                             <td>
-                                                <form action="{{route('admins.destroy', $user->id)}}" method="POST">
+                                                <form action="{{route('clients.destroy', $user->id)}}" method="POST">
                                                     {{ csrf_field() }}
                                                     <input type="hidden" name="_method" value="DELETE"/>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <a href="{{route('admins.edit',$user->id)}}" class="btn btn-primary btn-sm">Editar</a>
+                                                        <a href="{{route('clients.edit',$user->id)}}" class="btn btn-primary btn-sm">Editar</a>
                                                         <button class="btn btn-danger btn-sm">Deletar</button>
                                                     </div>
                                                 </form>
@@ -46,7 +46,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        {{$users->links('vendor.pagination.default')}}
+                        {{$clients->links('vendor.pagination.default')}}
                     </div>
                 </div>
             </div>

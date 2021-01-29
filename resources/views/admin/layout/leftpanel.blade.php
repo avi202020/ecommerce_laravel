@@ -13,7 +13,7 @@
                 </li>
                 <li class="menu-title">Operacional</li>
                 <li>
-                    <a href="{{route('products.index')}}"> <i class="menu-icon fa fa-users"></i> </i>Clientes </a>
+                    <a href="{{route('clients.index')}}"> <i class="menu-icon fa fa-users"></i> </i>Clientes </a>
                 </li>
                 <li class="menu-title">Acesso ao sistema</li>
                 <li>

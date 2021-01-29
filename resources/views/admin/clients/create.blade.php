@@ -1,5 +1,13 @@
 @extends('admin.layout.app')
 
+@section('scripts')
+<script>
+    $(function(){
+        $("#cpf").mask("000.000.000-00");
+    });
+</script>
+@endsection
+
 @section('content')
 <div class="content">
     <div class="animated fadeIn">
@@ -11,10 +19,10 @@
                 <div class="card">
                     <div class="card-header">
                         <strong>{{$title}}</strong>
-                        <a href="{{route('admins.index')}}" class="btn btn-danger btn-sm" style="float:right">Voltar</a>
+                        <a href="{{route('clients.index')}}" class="btn btn-danger btn-sm" style="float:right">Voltar</a>
                     </div>
                     <div class="card-body card-block">
-                        <form method="POST" action="{{route('admins.store')}}" enctype='multipart/form-data'>
+                        <form method="POST" action="{{route('clients.store')}}" enctype='multipart/form-data'>
                             @csrf
                             <div class="form-group row">
                                 <div class="col-9">
@@ -33,6 +41,12 @@
                                 <div class="col-12">
                                     <label for="email" class="form-control-label">Email</label>
                                     <input type="text" name="email" class="form-control @if($errors->any() && empty(old('email'))) is-invalid @endif" value="{{old('email')}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label for="login">CPF</label>
+                                    <input type="text" id="cpf" class="form-control @if($errors->any() && empty(old('login'))) is-invalid @endif" name="login" value="{{old('login')}}"/>
                                 </div>
                             </div>
                             <div class="form-group row">

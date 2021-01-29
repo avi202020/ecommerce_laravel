@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
-use App\Services\UploadService;
+use App\Services\UploadPublicService;
 
 use App\Models\Produto;
 use App\Models\Categoria;
@@ -29,7 +29,7 @@ class ProductsController extends Controller
     {
         $produto = new Produto($request->all());
         if ($request->hasFile('foto')) {
-            $path = UploadService::uploadImage($request->file('foto'), 'produtos');
+            $path = UploadPublicService::uploadFile($request->file('foto'), 'produtos');
             $produto->foto = $path;
         }
         $produto->save();
@@ -57,7 +57,7 @@ class ProductsController extends Controller
         $produto = Produto::find($id);
         $produto->update($request->all());
         if ($request->hasFile('foto')) {
-            $path = UploadService::uploadImage($request->file('foto'), 'produtos');
+            $path = UploadPublicService::uploadFile($request->file('foto'), 'produtos');
             $produto->foto = $path;
             $produto->save();
         }

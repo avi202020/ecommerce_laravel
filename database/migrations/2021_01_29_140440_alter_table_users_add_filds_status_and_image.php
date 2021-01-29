@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableUsuariosAddColumnEmail extends Migration
+class AlterTableUsersAddFildsStatusAndImage extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AlterTableUsuariosAddColumnEmail extends Migration
     public function up()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->string('email',150);
+            $table->tinyinteger('status')->default(1);
+            $table->string('image',150)->default(1);
         });
     }
 
@@ -26,7 +27,8 @@ class AlterTableUsuariosAddColumnEmail extends Migration
     public function down()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->dropColumn('email');
+            $table->dropColumn('status');
+            $table->dropColumn('image');
         });
     }
 }

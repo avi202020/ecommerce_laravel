@@ -15,7 +15,7 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request){
         $cpf = preg_replace("/[^0-9]/","",$request->input("login"));
-        $credential = ['login'=> $cpf, 'password'=> $request->input("password")];
+        $credential = ['login'=> $cpf, 'password'=> $request->input("password"), 'status'=>1];
 
         if(Auth::attempt($credential)){
             return redirect()->route("home");

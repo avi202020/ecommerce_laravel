@@ -56,7 +56,11 @@ class AdminAcessController extends Controller
         if(empty($user)){
             return redirect()->route('admins.index')->withErrors(['error' => 'Usuário não localizado']);
         }
-        $user->update($request->all());
+        $data = $request->all();
+        if(empty($data['password'])){
+            unset($data['password']);
+        }
+        $user->update($data);
         if ($request->hasFile('image')) {
             $path = UploadPublicService::uploadFile($request->file('image'), 'users_admin');
             $user->image = $path;
