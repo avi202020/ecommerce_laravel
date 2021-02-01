@@ -18,6 +18,7 @@
                 <li class="menu-title">Acesso ao sistema</li>
                 <li>
                     <a href="{{route('admins.index')}}"> <i class="menu-icon fa fa-user-circle"></i> </i>Usuários </a>
+                    <a href="{{route('permissions.index')}}"> <i class="menu-icon fa fa-user-o"></i> </i>Perfil </a>
                 </li>
             </ul>
         </div>

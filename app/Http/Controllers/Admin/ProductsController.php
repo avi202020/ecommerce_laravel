@@ -9,11 +9,15 @@ use App\Services\UploadPublicService;
 
 use App\Models\Produto;
 use App\Models\Categoria;
+use Auth;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        dd($request->user()->hasDirectPermission('products.index'));
+        $user = Auth::guard('admin')->user();
+        dd($user->assignRole('Admin Master'));
         $products = Produto::paginate(10);
         return view('admin.products.index',compact('products'));
     }
