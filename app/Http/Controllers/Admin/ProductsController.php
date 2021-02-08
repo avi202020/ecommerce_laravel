@@ -17,7 +17,7 @@ class ProductsController extends Controller
     {
         dd($request->user()->hasDirectPermission('products.index'));
         $user = Auth::guard('admin')->user();
-        dd($user->assignRole('Admin Master'));
+        //dd($user->assignRole('Admin Master'));
         $products = Produto::paginate(10);
         return view('admin.products.index',compact('products'));
     }

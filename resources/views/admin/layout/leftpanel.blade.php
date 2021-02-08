@@ -8,7 +8,9 @@
                 </li>
                 <li class="menu-title">Cadastros</li>
                 <li>
+                    @if($admin->hasPermissionTo('products.index'))
                     <a href="{{route('products.index')}}"> <i class="menu-icon fa fa-shopping-bag"></i> </i>Produtos </a>
+                    @endif
                     <a href="{{route('categories.index')}}"> <i class="menu-icon fa fa-tags"></i> </i>Categorias </a>
                 </li>
                 <li class="menu-title">Operacional</li>
